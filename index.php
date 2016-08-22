@@ -10,10 +10,36 @@
   		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 	<body>
+	
+	<?php
+		/*error_reporting(E_ALL & ~E_NOTICE);*/
+
+		$appname = "empty";
+		$memory = "empty";
+		$instances = "empty";
+		$hostname = "empty";
+		$domain = "empty";
+
+		$appname = $_POST("appname");
+		$memory = $_POST("memory");
+		$instances = $_POST("instances");
+		$hostname = $_POST("hostname");
+		$domain = $_POST("domain");
+
+		$yaml_array = array(
+			"name" => $appname,
+			"memory" => $memory,
+			"instances" => $instances,
+			"host" => $hostname,
+			"domain" => $domain
+			);
+
+		/*$yaml = yaml_emit($yaml_array);*/
+		?>
 		<div class="container">
-		<h1>Welcome to the Manifester (Mk 1)</h1>
+		<h1>Welcome to the Manifester (Mk 0)</h1>
 		<em>Use this tool to create your Cloud Foundry Manifest file</em><br><br>
-		   <form target="_self" class="form-horizontal">
+		   <form target="_self" class="form-horizontal" method="post">
 
 		    <div class="form-group">
 		      <label for="appname" class="control-label col-sm-2">Application Name:</label>
@@ -79,22 +105,9 @@
 		  </form>
 		</div>
 
-		<?php
-		error_reporting(E_ALL & ~E_NOTICE);
-		$yaml_array = [
-			"name" => $_GET("appname"),
-			"memory" => $_GET("memory"),
-			"instances" => $_GET("instances"),
-			"host" => $_GET("hostname"),
-			"domain" => $_GET("domain"),
-			];
-
-		$yaml = yaml_emit($yaml_array);
-		var_dump($yaml);
-
-		?>
-
-		</br></br>
+		<br>
+		<h1>Preview</h1>
+		<?php print_r($yaml_array);?>
 	 </body>
 
 <!-- 

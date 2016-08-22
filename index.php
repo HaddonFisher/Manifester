@@ -81,13 +81,13 @@
 
 		<?php
 		error_reporting(E_ALL & ~E_NOTICE);
-		$yaml_array = array(
+		$yaml_array = [
 			"name" => $_GET("appname"),
 			"memory" => $_GET("memory"),
 			"instances" => $_GET("instances"),
 			"host" => $_GET("hostname"),
 			"domain" => $_GET("domain"),
-			);
+			];
 
 		$yaml = yaml_emit($yaml_array);
 		var_dump($yaml);

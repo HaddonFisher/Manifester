@@ -10,48 +10,22 @@
   		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-	
-	<?php
-		/*error_reporting(E_ALL & ~E_NOTICE);*/
-
-		$appname = "empty";
-		$memory = "empty";
-		$instances = "empty";
-		$hostname = "empty";
-		$domain = "empty";
-
-		$appname = $_POST("appname");
-		$memory = $_POST("memory");
-		$instances = $_POST("instances");
-		$hostname = $_POST("hostname");
-		$domain = $_POST("domain");
-
-		$yaml_array = array(
-			"name" => $appname,
-			"memory" => $memory,
-			"instances" => $instances,
-			"host" => $hostname,
-			"domain" => $domain
-			);
-
-		/*$yaml = yaml_emit($yaml_array);*/
-		?>
 		<div class="container">
-		<h1>Welcome to the Manifester (Mk 0)</h1>
+		<h1>Welcome to the Manifester (Mk 1)</h1>
 		<em>Use this tool to create your Cloud Foundry Manifest file</em><br><br>
-		   <form target="_self" class="form-horizontal" method="post">
+		   <form class="form-horizontal" method="POST" action="preview.php">
 
 		    <div class="form-group">
 		      <label for="appname" class="control-label col-sm-2">Application Name:</label>
 		      	<div class="col-sm-10">
-		      		<input type="text" class="form-control" id="appname">
+		      		<input type="text" class="form-control" id="appname" name="appname">
 		      	</div>
 		    </div>
 
 		    <div class="form-group">
 			  <label for="memory" class="control-label col-sm-2">Memory:</label>
 			  <div class="col-sm-10">
-				  <select class="form-control" id="sel1">
+				  <select class="form-control" id="memory" name="memory">
 				    <option>128M</option>
 				    <option>256M</option>
 				    <option>384M</option>
@@ -69,45 +43,41 @@
 		    <div class="form-group">
 		      <label for="hostname" class="control-label col-sm-2">Host Name:</label>
 		      <div class="col-sm-10">
-		      	<input type="text" class="form-control" id="hostname">
+		      	<input type="text" class="form-control" id="hostname" name=="hostname">
 		      </div>
 		    </div>
 
 		    <div class="form-group">
 		      <label for="domain" class="control-label col-sm-2">Domain:</label>
 		      <div class="col-sm-10">
-		      	<input type="text" class="form-control" id="domain">
+		      	<input type="text" class="form-control" id="domain" name="domain">
 	      	  </div>
 		    </div>
 
 			<div class="form-group">
 		      <label for="instances" class="control-label col-sm-2">Instances Needed:</label>
 		      <div class="col-sm-10">
-		      	<input type="number" class="form-control" id="instances">
+		      	<input type="number" class="form-control" id="instances" name="instances">
 		      </div>
 		    </div>
 
 		    <div class="form-group">
 		      <label for="buildpacks" class="control-label col-sm-2">Buildpacks Needed:</label>
 		      <div class="col-sm-10">
-		      	<input type="text" class="form-control" id="buildpacks" placeholder="GitHub links only please. Multiple buildpack URL's should be separated by a comma.">
+		      	<input type="text" class="form-control" id="buildpacks" name="buildpacks" placeholder="GitHub links only please.">
 		      </div>
 		    </div>
 
 		    <div class="form-group">
 		      <label for="path" class="control-label col-sm-2">Path:</label>
 		      <div class="col-sm-10">
-		      	<input type="text" class="form-control" id="path">
+		      	<input type="text" class="form-control" id="path" name="path">
 		      </div>
 		    </div>
 		    <button type="submit" class="btn btn-default">Submit</button>
 		  
 		  </form>
 		</div>
-
-		<br>
-		<h1>Preview</h1>
-		<?php print_r($yaml_array);?>
 	 </body>
 
 <!-- 

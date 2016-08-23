@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 	<head>
 		<title>Manifester</title>
@@ -12,15 +11,16 @@
 	<body>
 
 	<?php
-		error_reporting(E_ALL);
-		ini_set('display_errors', 'on');
 
+
+//--Prepopulate variables
 		$appname = "";
 		$memory = "";
 		$instances = "";
 		$hostname = "";
 		$domain = "";
 
+//--Attempt to fill with passed variables
 		if(isset($_POST["appname"]))
 			{$appname = $_POST["appname"];}
 
@@ -39,14 +39,7 @@
 		if(isset($_POST["buildpacks"]))
 			{$buildpacks = $_POST["buildpacks"];}
 
-		/*$yaml_array = array(
-			"name" => $appname,
-			"memory" => $memory,
-			"instances" => $instances,
-			"host" => $hostname,
-			"domain" => $domain,
-			);*/
-
+//--Begin manifest build process
 		$manifest = "---\napplications:\n- name: " . $appname;
 		
 		if($memory != ""){
@@ -69,21 +62,30 @@
 			$manifest = $manifest . "\n  buildpacks: " . $buildpacks;
 		}
 		?>
+<!--Build Display -->
 		<div class="container">
 		<h1>Preview Your Manifest</h1>
-		<em>You like?</em><br><br>
-		<!-- <?php echo "YAML Array is: "; print_r($yaml_array);?></br> -->
-		<!--<?php echo "GET Array is: "; print_r($_POST);?><br> -->
-
-				
-		<!--<?php
-		$mypostdata = file("php://input");
-		print "<pre>"; 
-		var_dump($_POST);
-		var_dump($mypostdata);
-		print "</pre>"?>-->
 
 		<pre><code><?php print_r($manifest) ?></code></pre>
+
+		<form method="POST" action="db.php" class="form-horizontal">
+			<div class="form-group">
+		      <label for="name" class="control-label col-sm-2">Your Name:</label>
+		      	<div class="col-sm-10">
+		      		<input type="text" class="form-control" name="name">
+		      	</div>
+		    </div>
+
+		    <div class="form-group">
+		      <label for="notes" class="control-label col-sm-2">Notes:</label>
+		      	<div class="col-sm-10">
+		      		<input type="textarea" class="form-control" name="notes">
+		      	</div>
+		    </div>
+
+			<input type='hidden' name='manifest' value='<?php echo $manifest;?>'>
+			<button type="submit" class="btn btn-default">Save to DB</button>
+		</form>
 
 	 </body>
 

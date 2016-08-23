@@ -28,13 +28,9 @@
 				  <select class="form-control" id="memory" name="memory">
 				    <option>128M</option>
 				    <option>256M</option>
-				    <option>384M</option>
 				    <option>512M</option>
-				    <option>640M</option>
 				    <option>768M</option>
-				    <option>896M</option>
 				    <option>1024M</option>
-				    <option>1152M</option>
 				    <option>1280M</option>
 				  </select>
 				 </div>
@@ -57,14 +53,14 @@
 			<div class="form-group">
 		      <label for="instances" class="control-label col-sm-2">Instances Needed:</label>
 		      <div class="col-sm-10">
-		      	<input type="number" class="form-control" id="instances" name="instances">
+		      	<input type="number" class="form-control" id="instances" name="instances" min="1" value="1">
 		      </div>
 		    </div>
 
 		    <div class="form-group">
 		      <label for="buildpacks" class="control-label col-sm-2">Buildpacks Needed:</label>
 		      <div class="col-sm-10">
-		      	<input type="text" class="form-control" id="buildpacks" name="buildpacks" placeholder="GitHub links only please.">
+		      	<input type="URL" class="form-control" id="buildpacks" name="buildpacks" placeholder="GitHub links only please.">
 		      </div>
 		    </div>
 

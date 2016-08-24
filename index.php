@@ -18,7 +18,7 @@
 		    <div class="form-group">
 		      <label for="appname" class="control-label col-sm-2">Application Name:</label>
 		      	<div class="col-sm-10">
-		      		<input type="text" class="form-control" id="appname" name="appname">
+		      		<input type="text" class="form-control" id="appname" name="appname" required>
 		      	</div>
 		    </div>
 

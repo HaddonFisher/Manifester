@@ -13,13 +13,16 @@
 
 		//--Get DB Connection Details from Environmental Variables
 			$env_array = json_decode($_ENV["VCAP_SERVICES"],true);
-			$mysql_u = $env_array['p-mysql'][0]['credentials']['username'];
+			$mysql_u = $env_array['p-mysql'][0]['credentials']['username'] . "@localhost";
 			$mysql_p = $env_array['p-mysql'][0]['credentials']['password'];
 			$mysql_c = $env_array['p-mysql'][0]['credentials']['hostname'];
 
 		//--Open a connection to the DB
-			$mysql_conn = new mysqli($mysql_c, $mysql_u, $mysql_p);
-
+			$mysql_conn =mysqli_connect($mysql_c, $mysql_u, $mysql_p);
+			if (mysqli_connect_errno())
+				  {
+				  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+				  }
 
 		//--Grab and stash the manifest
 			if(isset($_POST["manifest"]))
@@ -43,14 +46,14 @@
 			if(!mysqli_select_db($mysql_conn, "manifester"))
 				{
 					//echo("Database Creation Error Description: " . mysqli_error($mysql_conn));	
-					if(!mysqli_query("CREATE DATABASE IF NOT EXISTS manifester"))
+					if(!mysqli_query("CREATE DATABASE manifester"))
 					{
-						echo("Database Creation Error Description: " . mysqli_error($mysql_conn));	
+						echo("Database Creation Error Description: " . mysqli_error($mysql_conn) . "<br>");	
 					}
 					$grant_query = "GRANT ALL PRIVILEGES ON manifester.* TO '" . $mysql_u . "@localhost';";
 					if(!mysqli_query($grant_query))
 					{
-						echo("Database Grant Error Description: " . mysqli_error($mysql_conn));
+						echo("Database Grant Error Description: " . mysqli_error($mysql_conn) . "<br>");
 					}
 					mysqli_query("FLUSH PRIVILEGES");
 				}
